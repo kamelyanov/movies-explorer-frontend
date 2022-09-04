@@ -2,7 +2,7 @@ import './App.css';
 
 import Header from '../Header/Header';
 import Promo from '../Promo/Promo'
-//import AboutProject from '../AboutProject/AboutProject'
+import AboutProject from '../AboutProject/AboutProject'
 
 function App() {
     
@@ -10,6 +10,7 @@ function App() {
     <section className="page">
       <Header />
       <Promo />
+      <AboutProject />
     </section>
   );
 }
