@@ -8,6 +8,7 @@
   color: #fff;
   justify-content: space-between;
   padding: 0 70px 0;
+  user-select: none;
 }
 
 .header__logo {
@@ -26,7 +27,8 @@
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
-  color: #fff
+  color: #fff;
+  cursor: pointer;
 }
 
 .headers__link-button {
@@ -40,4 +42,5 @@
   line-height: 16px;
   font-weight: 500;
   align-self: center;
+  cursor: pointer;
 }
