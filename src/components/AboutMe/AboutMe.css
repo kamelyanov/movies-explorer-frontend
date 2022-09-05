@@ -1,0 +1,95 @@
+.aboutMe {
+  font-family: Inter, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 553px;
+  background-color: #202020;
+  color: #fff;
+}
+
+.aboutMe__container {
+  display: flex;
+  flex-direction: column;
+  margin: 110px 70px 0 70px;
+}
+
+.aboutMe__title-box {
+  min-height: 50px;
+  border-bottom: #dadada 1px solid;
+}
+
+.aboutMe__title {
+  margin: 0;
+  text-align: start;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}
+
+.aboutMe__description {
+  display: flex;
+  justify-content: space-between;
+  margin: 66px 70px 0;
+  min-height: 327px;
+}
+
+.aboutMe__info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+  width: 600px;
+  text-align: start;
+}
+
+.aboutMe__name {
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}
+
+.aboutMe__speciality {
+  margin: 18px 0 0 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.aboutMe__history {
+  margin: 26px 0 50px 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.aboutMe__links {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.aboutMe__link {
+  text-decoration: none;
+  color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.aboutMe__foto {
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+}
