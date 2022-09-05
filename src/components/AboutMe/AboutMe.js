@@ -6,7 +6,7 @@ function AboutMe () {
 <section id="aboutMe" className="aboutMe">
       <div className="aboutMe__container">
         <div className="aboutMe__title-box">
-          <h2 className="aboutMe__title">О себе</h2>
+          <h2 className="aboutMe__title">Студент</h2>
         </div>
       </div>
 
