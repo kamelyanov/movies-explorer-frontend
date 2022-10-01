@@ -1,0 +1,27 @@
+.more {
+  font-family: Inter, Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 166px;
+  background-color: #202020;
+}
+
+.more__button {
+  margin: 50px auto 80px;
+  width: 320px;
+  height: 36px;
+  background-color: #2f2f2f;
+  border-radius: 6px;
+  border: none;
+}
+
+.more__link {
+  margin: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 36px;
+  color: #fff;
+  text-decoration: none;
+}
