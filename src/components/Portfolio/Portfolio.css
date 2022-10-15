@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 525px;
   background-color: #202020;
   color: #fff;
 }
@@ -57,4 +56,51 @@
 .portfolio__info-arrow {
   width: 20px;
   height: 20px;
+}
+
+@media screen and (max-width: 1279px) {
+  .portfolio__container {
+    margin: 90px 50px 0 50px;
+  }
+
+  .portfolio__box-span {
+    font-size: 28px;
+  }
+
+  .portfolio__info-arrow {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .portfolio__container {
+    margin: 70px 14px 0 14px;
+  }
+
+  .portfolio__title {
+    margin: 0 0 20px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .portfolio__info {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.04em;
+  }
+
+  .portfolio__box {
+    height: 67px;
+  }
+
+  .portfolio__box-span {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__info-arrow {
+    width: 10px;
+    height: 10px;
+  }
 }

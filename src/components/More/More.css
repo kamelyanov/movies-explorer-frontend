@@ -25,3 +25,15 @@
   color: #fff;
   text-decoration: none;
 }
+
+@media screen and (max-width: 1279px) {
+  .more__button {
+    margin: 50px 30px 80px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .more__button {
+    margin: 50px 10px 80px;
+  }
+}

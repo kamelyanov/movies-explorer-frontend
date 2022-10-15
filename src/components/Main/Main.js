@@ -11,7 +11,7 @@ function Main(props) {
 
   return (
     <>
-      <Header loggedIn={loggedIn} />
+      <Header loggedIn={true} />
       <Promo />
       <AboutProject />
       <Techs />

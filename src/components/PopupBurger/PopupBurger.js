@@ -30,7 +30,10 @@ function PopupBurger(props) {
           </NavLink>
         </div>
         <Link to="/profile" className="popupBurger__profile link-opacity">
-          <img src={profile} alt="Изображение кнопки 'Аккаунт'"></img>
+          <h2 className="popupBurger__profile-title">Аккаунт</h2>
+          <div className="popupBurger__profile-icon-container">
+            <img src={profile} alt="Ссылка на профиль" className="popupBurger__profile-icon"></img>
+          </div>
         </Link>
       </div>
     </section>

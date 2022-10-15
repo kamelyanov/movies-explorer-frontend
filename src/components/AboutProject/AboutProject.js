@@ -32,6 +32,7 @@ function AboutProject () {
           <p className="about-project__bar_subtitle">Front-end</p>
         </div>
       </div>
+      
     </section>
   )
 }

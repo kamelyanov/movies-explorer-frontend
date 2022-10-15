@@ -98,3 +98,26 @@
   color: #EE3465;
   border: none;
 }
+
+@media screen and (max-width: 1279px) {
+  .profile__form {
+    margin: 100px auto 100px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .profile__form {
+    margin: 30px auto 30px;
+    width: 260px;
+  }
+
+  .profile__button {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__exit-button {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
