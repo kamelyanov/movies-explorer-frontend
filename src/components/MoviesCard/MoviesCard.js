@@ -1,17 +1,18 @@
 import "./MoviesCard.css";
 import { useState } from "react";
-import favoritedMovie from "../../images/icon-movies-favorired.svg"
+import deleteFavoritedMovieIcon from "../../images/icon__fovarite_delete.svg";
+import isFavoriteIcon from "../../images/icon-movies-favorited.svg";
 
 function MoviesCard() {
-  const [favorite, setfavorite] = useState(false);
+  const [favorited, setFavorited] = useState(false);
   const pathName = window.location.pathname;
 
   function favoriteMovie() {
-    if (favorite === true ? setfavorite(false) : setfavorite(true));
+    if (favorited === true ? setFavorited(false) : setFavorited(true));
   }
 
-    return (
-    <div className="moviesCard"> 
+  return (
+    <div className="moviesCard">
       <div className="moviesCard__info">
         <p className="moviesCard__title">Название фильма</p>
         <p className="moviesCard__duration">27 минут</p>
@@ -20,11 +21,18 @@ function MoviesCard() {
 
       {pathName === "/saved-movies" ? (
         <button type="button" className="moviesCard__favorited-delete link-opacity">
-          <img src={favoritedMovie} alt="Иконка удалить из избранного" className="moviesCard__favorites-icon"></img>
+          <img src={deleteFavoritedMovieIcon} alt="Иконка удалить из избранного" className="moviesCard__favorites-icon"></img>
         </button>
       ) : (
-        <button type="button" className="moviesCard__favorited link-opacity">
-          Сохранить
+        <button type="button" onClick={favoriteMovie}
+          className={`${favorited ? "moviesCard__isFavorited" : "moviesCard__favorited"} link-opacity`}
+        >
+          {
+            favorited ?
+              <img src={isFavoriteIcon} alt="Иконка добавленного в избранное" className="moviesCard__favorites-icon"></img>
+              :
+              "Сохранить"
+          }
         </button>
       )}
     </div>
