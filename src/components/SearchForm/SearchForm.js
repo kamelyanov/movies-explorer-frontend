@@ -9,13 +9,11 @@ function SearchForm() {
     <section className="searchForm">
       <div className="searchForm__box">
         <div className="searchForm__search-bar">
-          <div className="searchForm__search-side">
+          <form className="searchForm__search-side">
             <img src={searchIcon} className="searchForm__icon" alt="Иконка поиска"></img>
             <input className="searchForm__search-input" required placeholder="Фильм"></input>
-            <div className="searchForm__findIcon-box link-opacity">
-              <img src={searchIconWhite} className="searchForm__findIcon link-opacity" alt="Кнопка поиска"></img>
-            </div>
-          </div>
+            <button className="searchForm__findIcon-box link-opacity"></button>           
+          </form>
           <div className="searchForm__format-side">
             <FilterCheckbox />
             <h2 className="searchForm__format-title">Короткометражки</h2>
