@@ -1,12 +1,10 @@
 import "./Profile.css";
-import Header from "../Header/Header";
 
 function Profile(props) {
   const { loggedIn, handleloggedInClick } = props;
 
   return (
     <>
-      <Header loggedIn={loggedIn} />
       <section className="profile">
         <form className="profile__form">
           <h2 className="profile__title">Привет, Виталий!</h2>

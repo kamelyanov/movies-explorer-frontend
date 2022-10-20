@@ -3,8 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router";
 
 import './App.css';
-
+import Header from "../Header/Header";
 import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
+
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
@@ -29,7 +31,8 @@ function App() {
   }
 
   return (
-    <section className="root">
+    <section className="page">
+      <Header loggedIn={loggedIn} />
       <Routes>
         <Route path="/" element={<Main loggedIn={loggedIn} />} />
         <Route
@@ -45,6 +48,7 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Footer />
     </section>
   );
 }

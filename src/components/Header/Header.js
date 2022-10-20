@@ -9,7 +9,7 @@ function Header(props) {
   const { loggedIn } = props;
   const pathName = window.location.pathname;
 
-  const headerClassName = `header ${loggedIn & (pathName !== "/") ? "header-dark" : ""} `
+  const headerClassName = `header ${loggedIn || (pathName !== "/") ? "header-dark" : ""} `
 
   return (
     <header className={headerClassName}>

@@ -11,7 +11,7 @@
 .footer__container {
   display: flex;
   flex-direction: column;
-  margin: 79px 70px 0 70px;
+  margin: 59px 70px 0 70px;
   width: 100%;
 }
 
@@ -68,7 +68,7 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .footer {
     min-height: 270px;
   }

@@ -12,7 +12,7 @@ function MoviesCard() {
   }
 
   return (
-    <div className="moviesCard">
+    <li className="moviesCard">
       <div className="moviesCard__info">
         <p className="moviesCard__title">Название фильма</p>
         <p className="moviesCard__duration">27 минут</p>
@@ -35,7 +35,7 @@ function MoviesCard() {
           }
         </button>
       )}
-    </div>
+    </li>
   )
 }
 

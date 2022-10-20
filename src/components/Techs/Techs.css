@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 625px;
   background-color: #272727;
   color: #fff;
 }
@@ -63,7 +62,6 @@
   display: flex;
   justify-content: center;
   margin: 100px auto 0;
-  height: 60px;
 }
 
 .techs__technology {
@@ -92,10 +90,6 @@
 }
 
 @media screen and (max-width: 1279px) {
-  .techs {
-    min-height: 567px;
-  }
-
   .techs__container {
     margin: 90px 50px 0 50px;
   }
@@ -112,7 +106,6 @@
 
   .techs__technologies {
     margin: 83px auto 0;
-    height: 57px;
   }
 
   .techs__technology {
@@ -126,9 +119,9 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .techs {
-    min-height: 651px;
+    background-color: #202020;
   }
 
   .techs__container {

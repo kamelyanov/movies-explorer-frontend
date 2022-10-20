@@ -130,7 +130,7 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .aboutMe__container {
     margin: 70px 14px 0 14px;
   }
@@ -148,6 +148,7 @@
   .aboutMe__foto {
     width: 292px;
     height: 352px;
+    align-self: center;
   }
 
   .aboutMe__info {
@@ -167,7 +168,7 @@
   }
 
   .aboutMe__history {
-    margin: 20px 0 0;
+    margin: 0;
     font-size: 11px;
     line-height: 16px;
   }

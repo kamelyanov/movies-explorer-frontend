@@ -9,7 +9,7 @@
 }
 
 .more__button {
-  margin: 50px auto 80px;
+  margin: 10px auto 80px;
   width: 320px;
   height: 36px;
   background-color: #2f2f2f;
@@ -32,7 +32,7 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .more__button {
     margin: 50px 10px 80px;
   }

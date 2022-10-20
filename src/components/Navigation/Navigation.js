@@ -51,7 +51,10 @@ function Navigation() {
             </NavLink>
           </div>
           <NavLink to="/profile" className="navigation__profile link-opacity">
-            <img src={profile} alt="Изображение кнопки 'Аккаунт'"></img>
+            <h2 className="navigation__profile-title">Аккаунт</h2>
+            <div className="navigation__profile-icon-container">
+              <img src={profile} alt="Ссылка на профиль" className="navigation__profile-icon"></img>
+            </div>
           </NavLink>
         </section>
       )}

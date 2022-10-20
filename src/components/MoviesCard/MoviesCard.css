@@ -2,20 +2,21 @@
   font-family: Inter, Arial, sans-serif;
   background-color: #222222;
   width: 360px;
-  height: 320px;
+  height: 302px;
   display: flex;
   flex-direction: column;
   color: #fff;
-  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
   border-radius: 6px;
+  padding-bottom: 18px;
 }
 
 .moviesCard__info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 14px;
+  padding: 0 14px;
   height: 68px;
+  margin: 0;
 }
 
 .moviesCard__title {
@@ -26,14 +27,16 @@
 }
 
 .moviesCard__duration{
-  font-size: 11px;
+  margin-right: 7px;
+  font-size: 13px;
   line-height: 13px;
   color: #8b8b8b;
 }
 
 .moviesCard__image {
-  width: 360px;
+  width: 100%;
   height: 200px;
+  margin-bottom: 18px;
 }
 
 .moviesCard__isFavorited {
@@ -43,11 +46,9 @@
   border: none;
   border-radius: 15px;
   box-shadow: 0px 4px rgba(0, 0, 0, 0.25);
-  margin: 18px auto 18px;
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-self: center;
+  flex-shrink:0;
 }
 
 .moviesCard__favorited-delete {
@@ -56,49 +57,42 @@
   height: 30px;
   border: none;
   border-radius: 15px;
-  margin: 18px auto 18px;
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-self: center;
+  flex-shrink:0;
 }
 
 .moviesCard__favorited {
+  display: block;
   background-color: #313131;
   width: 100px;
   height: 30px;
   border: none;
   border-radius: 15px;
-  margin: 18px auto 18px;
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-self: center;
   color: #fff;
   font-size: 12px;
-  line-height: 11px;
+  line-height: 12px;
+  flex-shrink: 0;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .moviesCard {
     width: 342px;
-    height: 309px;
   }
   
   .moviesCard__image {
-    width: 342px;
     height: 190px;
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .moviesCard {
     width: 300px;
-    height: 271px;
   }
   
   .moviesCard__image {
-    width: 300px;
     height: 168px;
   }
 }
