@@ -6,7 +6,6 @@ const handleResponse = response => response.ok ? response.json() : Promise.rejec
 export const register = (name, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
-    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -60,7 +59,6 @@ export const patchUserInfo = (name, email) => {
 export const saveFilm = (card) => {
   return fetch(`${BASE_URL}/movies`, {
     method: "POST",
-    credentials: "include",
     headers: {
       authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
@@ -72,7 +70,7 @@ export const saveFilm = (card) => {
       year: card.year,
       description: card.description,
       image: `${BEATFILM_URL + card.image.url}`,
-      trailer: card.trailerLink,
+      trailerLink: card.trailerLink,
       thumbnail: card.trailerLink,
       movieId: card.id,
       nameRU: card.nameRU,
@@ -85,7 +83,6 @@ export const saveFilm = (card) => {
 export const getFilms = () => {
   return fetch(`${BASE_URL}/movies`, {
     method: "GET",
-    credentials: "include",
     headers: {
       authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
@@ -94,10 +91,9 @@ export const getFilms = () => {
   .then(handleResponse)
 };
 
-export const deleteFilm = (card) => {
-  return fetch(`${BASE_URL}/movies/${card._id}`, {
+export const deleteFilm = (cardId) => {
+  return fetch(`${BASE_URL}/movies/${cardId}`, {
     method: "DELETE",
-    credentials: "include",
     headers: {
       authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",

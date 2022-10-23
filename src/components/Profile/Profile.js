@@ -19,8 +19,11 @@ function Profile(props) {
   } = props;
 
   const currentUser = useContext(CurrentUserContext);
+
   const { values, handleChange, errors, isValid } = Validation();
 
+  console.log(currentUser)
+  
   function handleEdit(e) {
     e.preventDefault();
     setEditProfile(true);

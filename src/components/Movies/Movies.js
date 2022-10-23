@@ -3,7 +3,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import More from "../More/More";
 import Preloader from "../Preloader/Preloader";
 import { useEffect, useRef, useState } from "react";
-import { fetchMovies } from "../../utils/MoviesApi";
+import { apiUrl, fetchMovies } from "../../utils/MoviesApi";
 
 function getLoadingStrategy(screenWidth) {
   if (screenWidth >= 1280) {
@@ -24,7 +24,7 @@ const localStorageKeys = {
 };
 
 function Movies(props) {
-
+  const { savedMovies, handleSaveFilm, handleDeleteFilm } = props;
   const [showPreloader, setShowPreloader] = useState(false);
   const loadingStrategyRef = useRef(getLoadingStrategy(window.innerWidth));
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem(localStorageKeys.movies) || "null") || null);
@@ -32,8 +32,17 @@ function Movies(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [searchValue, setSearchValue] = useState(localStorage.getItem(localStorageKeys.search) || "");
   const [shortFilmsOnly, setShortFilmsOnly] = useState(JSON.parse(localStorage.getItem(localStorageKeys.shortFilm) || "false") || null);
+  const isLoadingRef = useRef(false);
 
   const onSearchImpl = async () => {
+    if (isLoadingRef.current) {
+      return;
+    }
+
+    isLoadingRef.current = true;
+
+    // разбить фильтрацию и загрузку как в SavedMovies
+
     try {
       setShowPreloader(true);
       setMovies([]);
@@ -54,6 +63,7 @@ function Movies(props) {
       setErrorMessage('�� ����� ������� ��������� ������. ��������, �������� � ����������� ��� ������ ����������. ��������� ������� � ���������� ��� ���');
     } finally {
       setShowPreloader(false);
+      isLoadingRef.current = false;
     }
   };
 
@@ -99,7 +109,16 @@ function Movies(props) {
   return (
     <>
       <SearchForm onSearch={setSearchValue} defaultValue={searchValue} defaultShortFilmValue={shortFilmsOnly} onShortFilmToggle={setShortFilmsOnly} />
-      {movies && movies.length !== 0 ? <MoviesCardList movies={movies.slice(0, visibleCount)} /> : null}
+      {movies && movies.length !== 0 ? <MoviesCardList handleSaveFilm={movieId => {
+        handleSaveFilm(movies.find(m => m.id === movieId));
+      }} handleDeleteFilm={handleDeleteFilm} movies={movies.slice(0, visibleCount).map(movie => ({
+        nameRU: movie.nameRU,
+        duration: movie.duration,
+        imageUrl: `${apiUrl}/${movie.image.url}`,
+        id: movie.id,
+        saved: savedMovies.find(x => x.movieId === movie.id) !== undefined,
+        trailerLink: movie.trailerLink,
+      }))} /> : null}
       {errorMessage}
       {showPreloader ? <Preloader /> : null}
       {movies && visibleCount < movies.length ? <More onClick={() => setVisibleCount(visibleCount + loadingStrategyRef.current.loadMoreCount)} /> : null}

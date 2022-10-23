@@ -19,17 +19,17 @@ function PopupBurger(props) {
       ></img>
       <div className="popupBurger__container">
         <div className="popupBurger__links">
-          <NavLink to="/" className={setActive}>
+          <NavLink to="/" className={setActive} onClick={onClose}>
             Главная
           </NavLink>
-          <NavLink to="/movies" className={setActive}>
+          <NavLink to="/movies" className={setActive} onClick={onClose}>
             Фильмы
           </NavLink>
-          <NavLink to="/saved-movies" className={setActive}>
+          <NavLink to="/saved-movies" className={setActive} onClick={onClose}>
             Сохраненные фильмы{" "}
           </NavLink>
         </div>
-        <Link to="/profile" className="popupBurger__profile link-opacity">
+        <Link to="/profile" className="popupBurger__profile link-opacity" onClick={onClose}>
           <h2 className="popupBurger__profile-title">Аккаунт</h2>
           <div className="popupBurger__profile-icon-container">
             <img src={profile} alt="Ссылка на профиль" className="popupBurger__profile-icon"></img>

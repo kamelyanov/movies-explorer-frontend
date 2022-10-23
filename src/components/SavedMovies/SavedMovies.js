@@ -1,15 +1,39 @@
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import Preloader from "../Preloader/Preloader";
+import { useEffect, useState } from "react";
 
 function SavedMovies(props) {
-  const { loggedIn, handlePreloader, showPreloader } = props;
+  const { savedMovies, handleDeleteFilm } = props;
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [shortFilmsOnly, setShortFilmsOnly] = useState(false);
+
+  useEffect(() => {
+    setErrorMessage(null);
+
+    const foundMovies = savedMovies
+      .filter(x => !shortFilmsOnly || x.duration <= 40)
+      .filter(x => x.description.toLowerCase().includes(searchValue));
+    setFilteredMovies(foundMovies);
+
+    if (foundMovies.length === 0) {
+      setErrorMessage('?????? ?? ???????');
+    }
+  }, [searchValue, savedMovies, shortFilmsOnly]);
 
   return (
     <>
-      {showPreloader ? <Preloader handlePreloader={handlePreloader} /> : ""}
-      <SearchForm handlePreloader={handlePreloader} />
-      <MoviesCardList />
+      <SearchForm onSearch={setSearchValue} defaultValue={searchValue} defaultShortFilmValue={shortFilmsOnly} onShortFilmToggle={setShortFilmsOnly} />
+      {filteredMovies.length !== 0 ? <MoviesCardList deleteType="cross" handleDeleteFilm={handleDeleteFilm} movies={filteredMovies.map(movie => ({
+        nameRU: movie.nameRU,
+        duration: movie.duration,
+        imageUrl: movie.image,
+        id: movie.movieId,
+        trailerLink: movie.trailerLink,
+        saved: true,
+      }))} /> : null}
+      {errorMessage}
     </>
   );
 }

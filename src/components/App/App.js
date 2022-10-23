@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import * as MainApi from "../../utils/MainApi";
 
 import './App.css';
@@ -12,28 +12,40 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext"
 
 function App() {
-  const history = useHistory()
-  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate()
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("token") !== null);
   const [currentUser, setCurrentUser] = useState({});
   const [saveCards, setSaveCards] = useState([]);
   const [errorMesage, setErrorMesage] = useState("");
   const [blockInput, setBlockInput] = useState(false);
-  const [showPreloader, setShowPreloader] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
   const [editProfile, setEditProfile] = useState(false);
   const [successEditProfile, setSuccessEditProfile] = useState(false);
+  const loadingSavedRef = useRef(null);
 
-  function registration({ name, email, password }) {
+  useEffect(() => {
+    if (loggedIn) {
+      MainApi.getUserInfo()
+        .then((userData) => {
+          setCurrentUser(userData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn]);
+
+  function registration(name, email, password) {
     setShowPreloader(true);
     setBlockInput(true);
-    MainApi.register({ name, email, password })
+    MainApi.register(name, email, password)
       .then((res) => {
         if (email === res.email) {
           authorization(email, password);
-          history.push('/movies')
+          navigate('/movies');
         }
       })
       .catch((err) => {
@@ -53,7 +65,7 @@ function App() {
         if (data.token) {
           localStorage.setItem("token", data.token);
           setLoggedIn(true);
-          history.push('/movies')
+          navigate('/movies');
         }
       })
       .catch((err) => {
@@ -95,7 +107,7 @@ function App() {
     localStorage.removeItem("savedMoviesInputValue");
     localStorage.removeItem("token");
     setLoggedIn(false);
-    history.push('/')
+    navigate('/');
   }
 
   function handleSaveFilm(card) {
@@ -114,12 +126,13 @@ function App() {
       });
   }
 
-  function handleDeleteFilm(card) {
+  function handleDeleteFilm(movieId) {
+    const movieData = saveCards.find(savedCard => savedCard.movieId === movieId);
     setShowPreloader(true);
     setBlockInput(true);
-    MainApi.deleteFilm(card)
+    MainApi.deleteFilm(movieData._id)
       .then(() => {
-        setSaveCards(saveCards.filter((saveCard) => saveCard._id !== card._id));
+        setSaveCards(saveCards.filter(savedCard => savedCard.movieId !== movieId));
       })
       .catch((err) => {
         console.log(err);
@@ -130,38 +143,61 @@ function App() {
       });
   }
 
+  const loadMovies = async () => {
+    if (loadingSavedRef.current !== null) {
+      return;
+    }
+
+    loadingSavedRef.current = true;
+
+    try {
+      setSaveCards(await MainApi.getFilms());
+    } catch (e) {
+      // error message?
+    } finally {
+      loadingSavedRef.current = false;
+      setShowPreloader(false);
+    }
+  };
+
+  loadMovies();
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <section className="page">
         <Header loggedIn={loggedIn} />
-        <Switch>
-          <Route path="/">
-            <Main loggedIn={loggedIn} />
-          </Route>
+        <Routes>
+          <Route path="/" index element={<Main loggedIn={loggedIn} />} />
 
-          <ProtectedRoute
+          <Route
             path="/movies"
-            component={Movies}
-            loggedIn={loggedIn}
+            element={loggedIn ? <Movies savedMovies={saveCards} handleSaveFilm={handleSaveFilm} handleDeleteFilm={handleDeleteFilm} /> : <Navigate to="/" replace />}
           />
 
-          <ProtectedRoute
+          <Route
             path="/saved-movies"
-            component={SavedMovies} loggedIn={loggedIn}
+            element={loggedIn ? <SavedMovies savedMovies={saveCards} handleDeleteFilm={handleDeleteFilm} /> : <Navigate to="/" replace />}
           />
 
-          <ProtectedRoute loggedIn={loggedIn}
+          <Route
             path="/profile"
-            component={Profile}
-            setEditProfile={setEditProfile}
-            handleUpdateUser={handleUpdateUser}
-            handleloggedOutClick={handleloggedOutClick}
-            setSuccessEditProfile={setSuccessEditProfile}
-            editProfile={editProfile}
-            errorMesage={errorMesage}
-            blockInput={blockInput}
-            successEditProfile={successEditProfile}
-            showPreloader={showPreloader}
+            element={
+              loggedIn
+                ? <Profile
+                  loggedIn={loggedIn}
+                  setEditProfile={setEditProfile}
+                  handleUpdateUser={handleUpdateUser}
+                  handleloggedOutClick={handleloggedOutClick}
+                  setSuccessEditProfile={setSuccessEditProfile}
+                  editProfile={editProfile}
+                  errorMesage={errorMesage}
+                  blockInput={blockInput}
+                  successEditProfile={successEditProfile}
+                  showPreloader={showPreloader}
+                  
+                />
+                : <Navigate to="/" replace />
+            }
           />
 
           <Route path="/signin"
@@ -183,7 +219,7 @@ function App() {
               />}
           />
           <Route path="*" element={<NotFoundPage />} />
-        </Switch>
+        </Routes>
         <Footer />
       </section>
     </CurrentUserContext.Provider>
