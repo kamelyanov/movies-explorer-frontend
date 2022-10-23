@@ -3,11 +3,11 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 
 function SavedMovies(props) {
-  const { loggedIn, handlePreloader, isPreloader } = props;
+  const { loggedIn, handlePreloader, showPreloader } = props;
 
   return (
     <>
-      {isPreloader ? <Preloader handlePreloader={handlePreloader} /> : ""}
+      {showPreloader ? <Preloader handlePreloader={handlePreloader} /> : ""}
       <SearchForm handlePreloader={handlePreloader} />
       <MoviesCardList />
     </>

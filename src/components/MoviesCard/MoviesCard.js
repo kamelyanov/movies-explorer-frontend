@@ -1,17 +1,21 @@
 import "./MoviesCard.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import deleteFavoritedMovieIcon from "../../images/icon__fovarite_delete.svg";
 import isFavoriteIcon from "../../images/icon-movies-favorited.svg";
 import { getThumbnailUrl } from "../../utils/MoviesApi";
 
 function MoviesCard(props) {
-  const {movie} = props;
-  const [favorited, setFavorited] = useState(false);
+  const {movie, handleSaveFilm, handleDeleteFilm, saveMmovies} = props;
+  const [isFavorited, setIsFavorited] = useState(false);
   const pathName = window.location.pathname;
 
-  function favoriteMovie() {
-    if (favorited === true ? setFavorited(false) : setFavorited(true));
-  }
+  useEffect(() => {
+    saveMmovies.map((saveMovie) => {
+      if (saveMovie.movieId === movie.id) {
+        setIsFavorited(true);
+      }
+    });
+  }, [saveMmovies]);
 
   return (
     <li className="moviesCard">
@@ -22,15 +26,26 @@ function MoviesCard(props) {
       <img src={getThumbnailUrl(movie)} alt="Обложка фильма" className="moviesCard__image"></img>
 
       {pathName === "/saved-movies" ? (
-        <button type="button" className="moviesCard__favorited-delete link-opacity">
+        <button type="button" className="moviesCard__favorited-delete link-opacity" 
+          onClick={() => {
+          handleDeleteFilm(movie);
+        }}>
           <img src={deleteFavoritedMovieIcon} alt="Иконка удалить из избранного" className="moviesCard__favorites-icon"></img>
         </button>
       ) : (
-        <button type="button" onClick={favoriteMovie}
-          className={`${favorited ? "moviesCard__isFavorited" : "moviesCard__favorited"} link-opacity`}
+        <button type="button"
+          className={`${isFavorited ? "moviesCard__isFavorited" : "moviesCard__favorited"} link-opacity`}
+          onClick={() => {
+            if (isFavorited) {
+              handleDeleteFilm(saveMmovies.find((saveMovie) => saveMovie.movieId === movie.id));
+            } else {
+              handleSaveFilm(movie);
+            }
+            setIsFavorited(!isFavorited);
+          }}
         >
           {
-            favorited ?
+            isFavorited ?
               <img src={isFavoriteIcon} alt="Иконка добавленного в избранное" className="moviesCard__favorites-icon"></img>
               :
               "Сохранить"

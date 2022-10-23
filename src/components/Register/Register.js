@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { useState } from "react"
 import { Validation } from "../../utils/Validation";
 
 import "./Register.css";
 import logo from "../../images/logo.svg";
+import Preloader from "../Preloader/Preloader";
 
 function Register(props) {
-  const { errorMesage, handleSubmit, blockInput } = props;
+  const { errorMesage, handleSubmit, blockInput, showPreloader } = props;
   const { values, handleChange, errors, isValid } = Validation();
 
 
@@ -17,6 +17,7 @@ function Register(props) {
 
   return (
     <section className="register">
+      {showPreloader && <Preloader />}
       <form noValidate
         className="register__form"
         onSubmit={submit}
@@ -76,6 +77,7 @@ function Register(props) {
           </p>
         </div>
         <div className="register__submit">
+          {errorMesage && <p className="register__submitError">{errorMesage}</p>}
           <button 
             type="submit" 
             className={`register__submit-button ${!isValid ? "register__submit-button_type_disable" : "link-opacity"}`}

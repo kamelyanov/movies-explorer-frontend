@@ -72,6 +72,14 @@
   outline: none;
 }
 
+.login__input_type_error {
+  color: #ee3465;
+}
+
+.login__error-text_type_disabled {
+  user-select: none;
+}
+
 .login__error-text {
   margin: 10px 0 0 0;
   font-style: normal;
@@ -98,6 +106,11 @@
   border-radius: 3px;
   border: none;
   user-select: none;
+}
+
+.login__submit-button_type_disable {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
 }
 
 .login__reg-question {

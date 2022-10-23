@@ -24,7 +24,6 @@ const localStorageKeys = {
 };
 
 function Movies(props) {
-  const { loggedIn } = props;
 
   const [showPreloader, setShowPreloader] = useState(false);
   const loadingStrategyRef = useRef(getLoadingStrategy(window.innerWidth));
@@ -45,14 +44,14 @@ function Movies(props) {
         .filter(x => !shortFilmsOnly || x.duration <= 40)
         .filter(x => x.description.toLowerCase().includes(searchValue));
       if (foundMovies.length === 0) {
-        setErrorMessage('Ничего не найдено');
+        setErrorMessage('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
         return;
       }
 
       setVisibleCount(loadingStrategyRef.current.defaultCount);
       setMovies(foundMovies);
     } catch (e) {
-      setErrorMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+      setErrorMessage('пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ');
     } finally {
       setShowPreloader(false);
     }
