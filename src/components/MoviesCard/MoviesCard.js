@@ -2,8 +2,10 @@ import "./MoviesCard.css";
 import { useState } from "react";
 import deleteFavoritedMovieIcon from "../../images/icon__fovarite_delete.svg";
 import isFavoriteIcon from "../../images/icon-movies-favorited.svg";
+import { getThumbnailUrl } from "../../utils/MoviesApi";
 
-function MoviesCard() {
+function MoviesCard(props) {
+  const {movie} = props;
   const [favorited, setFavorited] = useState(false);
   const pathName = window.location.pathname;
 
@@ -14,10 +16,10 @@ function MoviesCard() {
   return (
     <li className="moviesCard">
       <div className="moviesCard__info">
-        <p className="moviesCard__title">Название фильма</p>
-        <p className="moviesCard__duration">27 минут</p>
+        <p className="moviesCard__title">{movie.nameRU}</p>
+        <p className="moviesCard__duration">{movie.duration} мин</p>
       </div>
-      <img src="https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg" alt="Обложка фильма" className="moviesCard__image"></img>
+      <img src={getThumbnailUrl(movie)} alt="Обложка фильма" className="moviesCard__image"></img>
 
       {pathName === "/saved-movies" ? (
         <button type="button" className="moviesCard__favorited-delete link-opacity">

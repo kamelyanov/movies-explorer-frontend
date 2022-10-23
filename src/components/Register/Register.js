@@ -1,12 +1,26 @@
 import { Link } from "react-router-dom";
+import { useState } from "react"
+import { Validation } from "../../utils/Validation";
 
 import "./Register.css";
 import logo from "../../images/logo.svg";
 
-function Register() {
+function Register(props) {
+  const { errorMesage, handleSubmit, blockInput } = props;
+  const { values, handleChange, errors, isValid } = Validation();
+
+
+  function submit(evt) {
+    evt.preventDefault();
+    handleSubmit(values.name, values.email, values.password);
+  }
+
   return (
     <section className="register">
-      <form className="register__form">
+      <form noValidate
+        className="register__form"
+        onSubmit={submit}
+        >
         <div className="register__header">
           <Link className="register__link" to="/">
             <img src={logo} className="register__logo link-opacity" alt="Логотип"></img>
@@ -15,29 +29,57 @@ function Register() {
         </div>
         <div className="register__container">
           <p className="register__text">Имя</p>
-          <input className="register__input" type="text" required value="Виталий" />
-          <p className="register__error-text" style={{ visibility: "hidden" }}>
-            Что-то пошло не так...
+          <input className={`register__input ${errors.name && `register__input_type_error`}`}
+            type="name"
+            name="name"
+            onChange={handleChange}
+            minLength="2"
+            maxLength="30"
+            pattern="^[A-Za-zА-Яа-я\s]{1,}$"
+            required
+            autoComplete="off"
+            disabled={blockInput && "disabled"}
+          />
+          <p className={`register__error-text ${!errors.name && `register__error-text_type_disabled`}`}>
+            {errors.name ? errors.name : "⁣"}
           </p>
 
           <p className="register__text">E-mail</p>
-          <input className="register__input" type="email" required value="pochta@yandex.ru" />
-          <p className="register__error-text" style={{ visibility: "hidden" }}>
-            Что-то пошло не так...
+          <input
+            className={`register__input ${errors.email && `register__input_type_error`}`}
+            type="email"
+            name="email"
+            onChange={handleChange}
+            minLength="2"
+            maxLength="30"
+            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,63}$"
+            required
+            disabled={blockInput && "disabled"}
+          />
+          <p className={`register__error-text ${!errors.email && `register__error-text_type_disabled`}`}>
+            {errors.email ? errors.email : "⁣"}
           </p>
 
           <p className="register__text">Пароль</p>
           <input
-            className="register__input"
-            value="••••••••••••••"
+            className={`register__input ${errors.password && `register__input_type_error`}`}
             type="password"
+            name="password"
+            onChange={handleChange}
+            minLength="8"
+            maxLength="30"
             required
-            style={{ color: "#EE3465" }}
+            disabled={blockInput && "disabled"}
           />
-          <p className="register__error-text">Что-то пошло не так...</p>
+          <p className={`register__error-text ${!errors.password && `register__error-text_type_disabled`}`}>
+            {errors.password ? errors.password : "⁣"}
+          </p>
         </div>
         <div className="register__submit">
-          <button type="submit" className="register__submit-button link-opacity">
+          <button 
+            type="submit" 
+            className={`register__submit-button ${!isValid ? "register__submit-button_type_disable" : "link-opacity"}`}
+          >
             Зарегистрироваться
           </button>
           <h2 className="register__reg-question">
