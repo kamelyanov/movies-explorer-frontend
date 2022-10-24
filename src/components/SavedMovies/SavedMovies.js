@@ -10,7 +10,7 @@ function SavedMovies(props) {
   const [searchValue, setSearchValue] = useState("");
   const [shortFilmsOnly, setShortFilmsOnly] = useState(false);
 
-  
+
 
   useEffect(() => {
     setErrorMessage(null);

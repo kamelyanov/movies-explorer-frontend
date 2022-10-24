@@ -23,7 +23,7 @@ function Profile(props) {
   const { values, handleChange, errors, isValid } = Validation();
 
   console.log(currentUser)
-  
+
   function handleEdit(e) {
     e.preventDefault();
     setEditProfile(true);
@@ -51,17 +51,17 @@ function Profile(props) {
       <section className="profile">
         {showPreloader && <Preloader />}
         <form noValidate
-        className="profile__form" 
-        onSubmit={handleSubmit}
+          className="profile__form"
+          onSubmit={handleSubmit}
         >
-        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+          <h2 className="profile__title">Привет, {currentUser.name}!</h2>
           <div className="profile__container">
-          <p className={`profile__error-text ${!errors.name && `profile__error-text_type_disabled`}`}>
+            <p className={`profile__error-text ${!errors.name && `profile__error-text_type_disabled`}`}>
               {errors.name ? errors.name : "⁣"}
             </p>
             <div className="profile__form-element">
               <p className="profile__text">Имя</p>
-              <input 
+              <input
                 className={`profile__input ${errors.name && `profile__input_type_error`}`}
                 type="name"
                 name="name"
@@ -77,7 +77,7 @@ function Profile(props) {
             </div>
             <div className="profile__form-element">
               <p className="profile__text">E-mail</p>
-              <input 
+              <input
                 className={`profile__input ${errors.email && `profile__input_type_error`}`}
                 type="email"
                 name="email"
@@ -105,11 +105,10 @@ function Profile(props) {
                 {errorMesage && <p className="profile__submitError">{errorMesage}</p>}
                 <button
                   type="submit"
-                  className={`profile__button ${
-                    !isValid || (values.name === currentUser.name && values.email === currentUser.email)
+                  className={`profile__button ${!isValid || (values.name === currentUser.name && values.email === currentUser.email)
                       ? "profile__submit-button_type_disable"
                       : "link-opacity"
-                  }`}
+                    }`}
                   disabled={
                     !isValid || (values.name === currentUser.name && values.email === currentUser.email)
                       ? "disabled"

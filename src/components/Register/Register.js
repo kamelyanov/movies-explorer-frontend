@@ -21,7 +21,7 @@ function Register(props) {
       <form noValidate
         className="register__form"
         onSubmit={submit}
-        >
+      >
         <div className="register__header">
           <Link className="register__link" to="/">
             <img src={logo} className="register__logo link-opacity" alt="Логотип"></img>
@@ -78,8 +78,8 @@ function Register(props) {
         </div>
         <div className="register__submit">
           {errorMesage && <p className="register__submitError">{errorMesage}</p>}
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className={`register__submit-button ${!isValid ? "register__submit-button_type_disable" : "link-opacity"}`}
           >
             Зарегистрироваться

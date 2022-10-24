@@ -1,25 +1,25 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
- function MoviesCardList(props) {
-   const {
-     handleSaveFilm,
-     handleDeleteFilm,
+function MoviesCardList(props) {
+  const {
+    handleSaveFilm,
+    handleDeleteFilm,
     deleteType,
-   } = props;
-   return (
-     <section className="moviesCardList">
-       <ul className="moviesCardList__container">
+  } = props;
+  return (
+    <section className="moviesCardList">
+      <ul className="moviesCardList__container">
         {props.movies.map(movie =>
-            <MoviesCard
-              key={movie.id}
-               movie={movie}
-               handleSaveFilm={handleSaveFilm}
-               handleDeleteFilm={handleDeleteFilm}
-              deleteType={deleteType}
-           />
-         )}
-       </ul>
+          <MoviesCard
+            key={movie.id}
+            movie={movie}
+            handleSaveFilm={handleSaveFilm}
+            handleDeleteFilm={handleDeleteFilm}
+            deleteType={deleteType}
+          />
+        )}
+      </ul>
     </section>
   );
 }

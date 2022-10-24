@@ -41,10 +41,9 @@ function SearchForm(props) {
             <h2 className="searchForm__format-title">Короткометражки</h2>
           </div>
         </div>
-        </div>
-        </section>
+      </div>
+    </section>
   );
 }
-
 
 export default SearchForm;

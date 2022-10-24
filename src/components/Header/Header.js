@@ -11,11 +11,11 @@ function Header(props) {
 
   return (
     <>
-      { 
+      {
         (location.pathname === '/movies' ||
-        location.pathname === '/saved-movies' ||
-        location.pathname === '/profile' || 
-        location.pathname === '/') ? 
+          location.pathname === '/saved-movies' ||
+          location.pathname === '/profile' ||
+          location.pathname === '/') ?
           <header className={headerClassName}>
             <Link className="header__link" to="/">
               <img src={logo} className="header__logo link-opacity" alt="Логотип"></img>
@@ -42,4 +42,4 @@ function Header(props) {
   )
 };
 
-export default Header
+export default Header;
