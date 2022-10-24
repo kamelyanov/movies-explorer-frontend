@@ -1,6 +1,7 @@
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { useEffect, useState } from "react";
+import './SavedMovies.css';
 
 function SavedMovies(props) {
   const { savedMovies, handleDeleteFilm } = props;
@@ -8,6 +9,8 @@ function SavedMovies(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [shortFilmsOnly, setShortFilmsOnly] = useState(false);
+
+  
 
   useEffect(() => {
     setErrorMessage(null);
@@ -18,7 +21,7 @@ function SavedMovies(props) {
     setFilteredMovies(foundMovies);
 
     if (foundMovies.length === 0) {
-      setErrorMessage('?????? ?? ???????');
+      setErrorMessage('Вы еще не сохранили ни одного фильма');
     }
   }, [searchValue, savedMovies, shortFilmsOnly]);
 
@@ -33,7 +36,7 @@ function SavedMovies(props) {
         trailerLink: movie.trailerLink,
         saved: true,
       }))} /> : null}
-      {errorMessage}
+      <span className="movies-errorMessage">{errorMessage}</span>
     </>
   );
 }

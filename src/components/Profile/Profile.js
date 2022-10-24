@@ -105,7 +105,7 @@ function Profile(props) {
                 {errorMesage && <p className="profile__submitError">{errorMesage}</p>}
                 <button
                   type="submit"
-                  className={`profile__submit-button ${
+                  className={`profile__button ${
                     !isValid || (values.name === currentUser.name && values.email === currentUser.email)
                       ? "profile__submit-button_type_disable"
                       : "link-opacity"

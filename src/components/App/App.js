@@ -152,8 +152,8 @@ function App() {
 
     try {
       setSaveCards(await MainApi.getFilms());
-    } catch (e) {
-      // error message?
+    } catch (err) {
+      console.log(err);
     } finally {
       loadingSavedRef.current = false;
       setShowPreloader(false);

@@ -4,6 +4,7 @@ import More from "../More/More";
 import Preloader from "../Preloader/Preloader";
 import { useEffect, useRef, useState } from "react";
 import { apiUrl, fetchMovies } from "../../utils/MoviesApi";
+import './Movies.css';
 
 function getLoadingStrategy(screenWidth) {
   if (screenWidth >= 1280) {
@@ -41,8 +42,6 @@ function Movies(props) {
 
     isLoadingRef.current = true;
 
-    // разбить фильтрацию и загрузку как в SavedMovies
-
     try {
       setShowPreloader(true);
       setMovies([]);
@@ -53,14 +52,14 @@ function Movies(props) {
         .filter(x => !shortFilmsOnly || x.duration <= 40)
         .filter(x => x.description.toLowerCase().includes(searchValue));
       if (foundMovies.length === 0) {
-        setErrorMessage('������ �� �������');
+        setErrorMessage('Ничего не найдено');
         return;
       }
 
       setVisibleCount(loadingStrategyRef.current.defaultCount);
       setMovies(foundMovies);
     } catch (e) {
-      setErrorMessage('�� ����� ������� ��������� ������. ��������, �������� � ����������� ��� ������ ����������. ��������� ������� � ���������� ��� ���');
+      setErrorMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
     } finally {
       setShowPreloader(false);
       isLoadingRef.current = false;
@@ -119,7 +118,7 @@ function Movies(props) {
         saved: savedMovies.find(x => x.movieId === movie.id) !== undefined,
         trailerLink: movie.trailerLink,
       }))} /> : null}
-      {errorMessage}
+      <span className="movies-errorMessage">{errorMessage}</span>
       {showPreloader ? <Preloader /> : null}
       {movies && visibleCount < movies.length ? <More onClick={() => setVisibleCount(visibleCount + loadingStrategyRef.current.loadMoreCount)} /> : null}
     </>

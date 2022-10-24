@@ -103,6 +103,17 @@
   background-color: #202020;
   color: #fff;
   border: none;
+  margin: 0 auto 0;
+}
+
+.profile__submit-button_type_disable {
+  color: #c2c2c2;
+}
+
+.profile__saveContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile__exit-button {
@@ -113,6 +124,17 @@
   line-height: 16px;
   background-color: #202020;
   color: #EE3465;
+  border: none;
+}
+
+.profile__successMessage {
+  margin: 0 auto 30px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  background-color: #202020;
+  color: #228cbb;
   border: none;
 }
 

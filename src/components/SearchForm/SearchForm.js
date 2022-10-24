@@ -29,7 +29,7 @@ function SearchForm(props) {
       <div className="searchForm__box">
         <div className="searchForm__search-bar">
 
-          <form className="searchForm__search-side" onSubmit={onFormSubmit}>
+          <form className="searchForm__search-side" onSubmit={onFormSubmit} noValidate>
             <img src={searchIcon} className="searchForm__icon" alt="Иконка поиска"></img>
 
             <input className="searchForm__search-input" required placeholder="Фильм" ref={searchInputRef} defaultValue={defaultValue} ></input>
