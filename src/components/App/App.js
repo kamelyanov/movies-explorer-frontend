@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import * as MainApi from "../../utils/MainApi";
 
@@ -21,7 +21,7 @@ function App() {
   const [saveCards, setSaveCards] = useState([]);
   const [errorMesage, setErrorMesage] = useState("");
   const [blockInput, setBlockInput] = useState(false);
-  const [showPreloader, setShowPreloader] = useState(true);
+  const [showPreloader, setShowPreloader] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
   const [successEditProfile, setSuccessEditProfile] = useState(false);
 
@@ -121,7 +121,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        handleloggedOutClick()
+        setErrorMesage("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен.")
       })
       .finally(() => {
         setShowPreloader(false);
@@ -139,7 +139,6 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        handleloggedOutClick()
       })
       .finally(() => {
         setShowPreloader(false);
@@ -171,7 +170,7 @@ function App() {
         <Header loggedIn={loggedIn} />
         <Routes>
           <Route path="/" index element={<Main loggedIn={loggedIn} />} />
-
+          <Route path="*" element={<NotFoundPage />} />
           <Route
             path="/movies"
             element={loggedIn ? <Movies savedMovies={saveCards} handleSaveFilm={handleSaveFilm} handleDeleteFilm={handleDeleteFilm} /> : <Navigate to="/" replace />}
@@ -224,7 +223,6 @@ function App() {
                 showPreloader={showPreloader}
               />}
           />
-          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
       </section>
