@@ -57,6 +57,12 @@ export const patchUserInfo = (name, email) => {
 };
 
 export const saveFilm = (card) => {
+  let trailerLink = ""
+  try {
+    trailerLink = new URL(card.trailerLink).toString()
+  } 
+  catch {}
+
   return fetch(`${BASE_URL}/movies`, {
     method: "POST",
     headers: {
@@ -64,17 +70,17 @@ export const saveFilm = (card) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      country: card.country,
+      country: card.country || "",
       director: card.director,
       duration: card.duration,
       year: card.year,
       description: card.description,
       image: `${BEATFILM_URL + card.image.url}`,
-      trailerLink: card.trailerLink,
-      thumbnail: card.trailerLink,
+      trailerLink: trailerLink,
+      thumbnail: `https://api.nomoreparties.co/${card.image.formats.thumbnail.url}`,
       movieId: card.id,
       nameRU: card.nameRU,
-      nameEN: card.nameEN,
+      nameEN: card.nameEN || "",
     }),
   })
   .then(handleResponse)

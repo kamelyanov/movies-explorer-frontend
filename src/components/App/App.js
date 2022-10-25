@@ -24,7 +24,6 @@ function App() {
   const [showPreloader, setShowPreloader] = useState(true);
   const [editProfile, setEditProfile] = useState(false);
   const [successEditProfile, setSuccessEditProfile] = useState(false);
-  const loadingSavedRef = useRef(null);
 
   useEffect(() => {
     if (loggedIn) {
@@ -33,6 +32,7 @@ function App() {
           setCurrentUser(userData);
         })
         .catch((err) => {
+          handleloggedOutClick();
           console.log(err);
         });
     }
@@ -98,15 +98,17 @@ function App() {
       });
   }
 
-  function handleloggedOutClick(evt) {
-    evt.preventDefault();
+  function handleloggedOutClick() {
     localStorage.removeItem("filterCards");
     localStorage.removeItem("moviesTumbler");
     localStorage.removeItem("savedMoviesTumbler");
     localStorage.removeItem("moviesInputValue");
     localStorage.removeItem("savedMoviesInputValue");
     localStorage.removeItem("token");
+    localStorage.removeItem("lastSearch");
+    localStorage.removeItem("lastShortFilm");
     setLoggedIn(false);
+    setShowPreloader(false);
     navigate('/');
   }
 
@@ -119,6 +121,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        handleloggedOutClick()
       })
       .finally(() => {
         setShowPreloader(false);
@@ -136,6 +139,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        handleloggedOutClick()
       })
       .finally(() => {
         setShowPreloader(false);
@@ -144,23 +148,22 @@ function App() {
   }
 
   const loadMovies = async () => {
-    if (loadingSavedRef.current !== null) {
-      return;
-    }
-
-    loadingSavedRef.current = true;
-
     try {
       setSaveCards(await MainApi.getFilms());
     } catch (err) {
       console.log(err);
     } finally {
-      loadingSavedRef.current = false;
       setShowPreloader(false);
     }
   };
 
-  loadMovies();
+  useEffect (() =>{
+    if (!loggedIn) {
+      setSaveCards([])
+      return
+    }
+    loadMovies();
+  }, [loggedIn, currentUser])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -187,7 +190,10 @@ function App() {
                   loggedIn={loggedIn}
                   setEditProfile={setEditProfile}
                   handleUpdateUser={handleUpdateUser}
-                  handleloggedOutClick={handleloggedOutClick}
+                  handleloggedOutClick={(e) => {
+                    e.preventDefault()
+                    handleloggedOutClick()
+                    }}
                   setSuccessEditProfile={setSuccessEditProfile}
                   editProfile={editProfile}
                   errorMesage={errorMesage}

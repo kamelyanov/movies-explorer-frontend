@@ -10,14 +10,13 @@ function SavedMovies(props) {
   const [searchValue, setSearchValue] = useState("");
   const [shortFilmsOnly, setShortFilmsOnly] = useState(false);
 
-
-
   useEffect(() => {
     setErrorMessage(null);
 
     const foundMovies = savedMovies
       .filter(x => !shortFilmsOnly || x.duration <= 40)
-      .filter(x => x.description.toLowerCase().includes(searchValue));
+      .filter(x => x.nameRU.toLowerCase().includes(searchValue.toLowerCase()));
+      
     setFilteredMovies(foundMovies);
 
     if (foundMovies.length === 0) {

@@ -1,10 +1,22 @@
 export const apiUrl = "https://api.nomoreparties.co";
 
-export async function fetchMovies() {
-	const response = await fetch(`${apiUrl}/beatfilm-movies`);
-	if (!response.ok) {
-		throw new Error("Response is not ok");
-	}
+let moviesCache = null;
 
-	return response.json();
+export async function fetchMovies() {
+	if (moviesCache !== null) {
+		return moviesCache
+	} 
+
+	moviesCache = fetch(`${apiUrl}/beatfilm-movies`)
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error("Response is not ok");
+			};
+			return response.json();
+		})
+		.catch((e) => {
+			moviesCache = null
+			throw e
+		})
+	return moviesCache
 }

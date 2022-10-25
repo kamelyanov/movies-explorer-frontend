@@ -21,18 +21,17 @@ function getLoadingStrategy(screenWidth) {
 const localStorageKeys = {
   search: "lastSearch",
   shortFilm: "lastShortFilm",
-  movies: "lastMovies",
 };
 
 function Movies(props) {
   const { savedMovies, handleSaveFilm, handleDeleteFilm } = props;
   const [showPreloader, setShowPreloader] = useState(false);
   const loadingStrategyRef = useRef(getLoadingStrategy(window.innerWidth));
-  const [movies, setMovies] = useState(JSON.parse(localStorage.getItem(localStorageKeys.movies) || "null") || null);
+  const [movies, setMovies] = useState(null);
   const [visibleCount, setVisibleCount] = useState(loadingStrategyRef.current.defaultCount);
   const [errorMessage, setErrorMessage] = useState(null);
   const [searchValue, setSearchValue] = useState(localStorage.getItem(localStorageKeys.search) || "");
-  const [shortFilmsOnly, setShortFilmsOnly] = useState(JSON.parse(localStorage.getItem(localStorageKeys.shortFilm) || "false") || null);
+  const [shortFilmsOnly, setShortFilmsOnly] = useState(JSON.parse(localStorage.getItem(localStorageKeys.shortFilm) || "false") || false);
   const isLoadingRef = useRef(false);
 
   const onSearchImpl = async () => {
@@ -43,6 +42,11 @@ function Movies(props) {
     isLoadingRef.current = true;
 
     try {
+      if (searchValue.length === 0) {
+        setErrorMessage('Нужно ввести ключевое слово')
+        return;
+      }
+
       setShowPreloader(true);
       setMovies([]);
       setErrorMessage(null);
@@ -50,7 +54,8 @@ function Movies(props) {
       const movies = await fetchMovies();
       const foundMovies = movies
         .filter(x => !shortFilmsOnly || x.duration <= 40)
-        .filter(x => x.description.toLowerCase().includes(searchValue));
+        .filter(x => x.nameRU.toLowerCase().includes(searchValue.toLowerCase()));
+
       if (foundMovies.length === 0) {
         setErrorMessage('Ничего не найдено');
         return;
@@ -95,10 +100,6 @@ function Movies(props) {
     localStorage.setItem(localStorageKeys.search, searchValue);
     onSearchImpl();
   }, [searchValue]);
-
-  useEffect(() => {
-    localStorage.setItem(localStorageKeys.movies, JSON.stringify(movies));
-  }, [movies]);
 
   useEffect(() => {
     localStorage.setItem(localStorageKeys.shortFilm, JSON.stringify(shortFilmsOnly));
