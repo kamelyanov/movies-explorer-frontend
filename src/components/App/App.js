@@ -207,6 +207,9 @@ function App() {
 
           <Route path="/signin"
             element={
+              loggedIn? 
+              <Navigate to="/" replace />
+              :
               <Login
                 errorMesage={errorMesage}
                 handleSubmit={authorization}
@@ -216,6 +219,9 @@ function App() {
           />
           <Route path="/signup"
             element={
+              loggedIn? 
+              <Navigate to="/" replace />
+              :
               <Register
                 errorMesage={errorMesage}
                 handleSubmit={registration}
