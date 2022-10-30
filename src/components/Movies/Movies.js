@@ -24,7 +24,7 @@ const localStorageKeys = {
 };
 
 function Movies(props) {
-  const { savedMovies, handleSaveFilm, handleDeleteFilm } = props;
+  const { savedMovies, handleSaveFilm, handleDeleteFilm, loggedIn } = props;
   const [showPreloader, setShowPreloader] = useState(false);
   const loadingStrategyRef = useRef(getLoadingStrategy(window.innerWidth));
   const [movies, setMovies] = useState(null);
@@ -40,13 +40,14 @@ function Movies(props) {
     }
 
     isLoadingRef.current = true;
-
+   
     try {
+     
       if (searchValue.length === 0) {
         setErrorMessage('Нужно ввести ключевое слово')
         setMovies([]);
         return;
-      }
+      } 
 
       setShowPreloader(true);
       setMovies([]);
@@ -99,6 +100,7 @@ function Movies(props) {
 
   useEffect(() => {
     localStorage.setItem(localStorageKeys.search, searchValue);
+    setErrorMessage('Нужно ввести ключевое сssssлово')
     onSearchImpl();
   }, [searchValue]);
 
@@ -107,9 +109,19 @@ function Movies(props) {
     onSearchImpl();
   }, [shortFilmsOnly]);
 
+  useEffect(() => {
+    setErrorMessage(null)
+  }, [loggedIn]);
+
   return (
     <>
-      <SearchForm onSearch={setSearchValue} defaultValue={searchValue} defaultShortFilmValue={shortFilmsOnly} onShortFilmToggle={setShortFilmsOnly} />
+      <SearchForm onSearch={(value) => {
+        if (value === "" && value === searchValue) {
+          onSearchImpl()
+        } else {
+          setSearchValue(value)
+        }
+      }} defaultValue={searchValue} defaultShortFilmValue={shortFilmsOnly} onShortFilmToggle={setShortFilmsOnly} />
       {movies && movies.length !== 0 ? <MoviesCardList handleSaveFilm={movieId => {
         handleSaveFilm(movies.find(m => m.id === movieId));
       }} handleDeleteFilm={handleDeleteFilm} movies={movies.slice(0, visibleCount).map(movie => ({

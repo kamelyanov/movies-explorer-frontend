@@ -16,7 +16,6 @@ function SearchForm(props) {
     }
 
     const searchString = searchInputRef.current.value.trim();
-   
     onSearch(searchString);
   };
 

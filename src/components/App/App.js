@@ -173,12 +173,12 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
           <Route
             path="/movies"
-            element={loggedIn ? <Movies savedMovies={saveCards} handleSaveFilm={handleSaveFilm} handleDeleteFilm={handleDeleteFilm} /> : <Navigate to="/" replace />}
+            element={loggedIn ? <Movies savedMovies={saveCards} handleSaveFilm={handleSaveFilm} handleDeleteFilm={handleDeleteFilm} loggedIn={loggedIn}/> : <Navigate to="/" replace />}
           />
 
           <Route
             path="/saved-movies"
-            element={loggedIn ? <SavedMovies savedMovies={saveCards} handleDeleteFilm={handleDeleteFilm} /> : <Navigate to="/" replace />}
+            element={loggedIn ? <SavedMovies savedMovies={saveCards} handleDeleteFilm={handleDeleteFilm}/> : <Navigate to="/" replace />}
           />
 
           <Route
