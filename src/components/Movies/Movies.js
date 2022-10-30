@@ -44,6 +44,7 @@ function Movies(props) {
     try {
       if (searchValue.length === 0) {
         setErrorMessage('Нужно ввести ключевое слово')
+        setMovies([]);
         return;
       }
 
