@@ -1,22 +1,24 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList() {
+function MoviesCardList(props) {
+  const {
+    handleSaveFilm,
+    handleDeleteFilm,
+    deleteType,
+  } = props;
   return (
-<section className="moviesCardList">
+    <section className="moviesCardList">
       <ul className="moviesCardList__container">
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+        {props.movies.map(movie =>
+          <MoviesCard
+            key={movie.id}
+            movie={movie}
+            handleSaveFilm={handleSaveFilm}
+            handleDeleteFilm={handleDeleteFilm}
+            deleteType={deleteType}
+          />
+        )}
       </ul>
     </section>
   );

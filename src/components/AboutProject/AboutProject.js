@@ -1,6 +1,6 @@
 import './AboutProject.css'
 
-function AboutProject () {
+function AboutProject() {
   return (
     <section className="about-project">
       <div className="about-project__title-box" >
@@ -32,9 +32,9 @@ function AboutProject () {
           <p className="about-project__bar_subtitle">Front-end</p>
         </div>
       </div>
-      
+
     </section>
   )
 }
 
-export default AboutProject
+export default AboutProject;

@@ -56,6 +56,19 @@
   color: #fff;
 }
 
+.profile__error-text {
+  margin: 10px 0 0 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+}
+
+.profile__error-text_type_disabled {
+  user-select: none;
+}
+
 .profile__input {
   height: 47px;
   text-align: end;
@@ -72,6 +85,10 @@
   border: none;
 }
 
+.profile__input_type_error {
+  color: #ee3465;
+}
+
 .profile__exit {
   display: flex;
   flex-direction: column;
@@ -86,6 +103,17 @@
   background-color: #202020;
   color: #fff;
   border: none;
+  margin: 0 auto 0;
+}
+
+.profile__submit-button_type_disable {
+  color: #c2c2c2;
+}
+
+.profile__saveContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile__exit-button {
@@ -96,6 +124,17 @@
   line-height: 16px;
   background-color: #202020;
   color: #EE3465;
+  border: none;
+}
+
+.profile__successMessage {
+  margin: 0 auto 30px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  background-color: #202020;
+  color: #228cbb;
   border: none;
 }
 

@@ -12,3 +12,5 @@
 ## [Ссылка на сайт ⬅️](https://movies.kamelianov.nomoredomains.sbs)
 
 ## [Ссылка на макет ⬅️](https://disk.yandex.ru/d/uGfCISSVqU52eA)
+
+## [Ссылка на пул реквест merge main <- level-3  ⬅️](https://github.com/kamelyanov/movies-explorer-frontend/pull/2)

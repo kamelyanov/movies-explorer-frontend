@@ -72,6 +72,14 @@
   outline: none;
 }
 
+.login__input_type_error {
+  color: #ee3465;
+}
+
+.login__error-text_type_disabled {
+  user-select: none;
+}
+
 .login__error-text {
   margin: 10px 0 0 0;
   font-style: normal;
@@ -100,6 +108,11 @@
   user-select: none;
 }
 
+.login__submit-button_type_disable {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+
 .login__reg-question {
   margin: 16px auto 0;
   font-style: normal;
@@ -121,7 +134,7 @@
   text-decoration: none;
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .login__form {
     margin: 30px auto;
     width: 260px;

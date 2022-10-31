@@ -1,9 +1,9 @@
 import './AboutMe.css';
 import Me from "../../images/me.jpg";
 
-function AboutMe () {
+function AboutMe() {
   return (
-<section id="aboutMe" className="aboutMe">
+    <section id="aboutMe" className="aboutMe">
       <div className="aboutMe__container">
         <div className="aboutMe__title-box">
           <h2 className="aboutMe__title">Студент</h2>
@@ -46,4 +46,4 @@ function AboutMe () {
   )
 }
 
-export default AboutMe
+export default AboutMe;
